@@ -83,11 +83,32 @@ function MainPage() {
         className="
           relative
           overflow-hidden
-          bg-gradient-to-r
-          from-[#F4F7FF]
-          to-[#DCE6FF]
+          bg-[#EEF3FF]
         "
       >
+        {/* LEFT BG */}
+        <div
+          className="
+            absolute
+            inset-y-0
+            left-0
+            w-1/2
+            bg-[#F4F7FF]
+          "
+        />
+
+        {/* RIGHT BG */}
+        <div
+          className="
+            absolute
+            inset-y-0
+            right-0
+            w-1/2
+            bg-[#DCE6FF]
+          "
+        />
+
+        {/* CENTER */}
         <div
           className="
             relative
@@ -97,39 +118,12 @@ function MainPage() {
             bg-cover
             bg-center
             bg-no-repeat
+            z-10
           "
           style={{
-            backgroundImage: "url('/Background2.png')",
+            backgroundImage: "url('/MainPage_Background.png')",
           }}
         >
-          {/* 좌우 배경 연결 */}
-          <div
-            className="
-              absolute
-              inset-y-0
-              left-0
-              w-40
-              bg-gradient-to-r
-              from-[#F4F7FF]
-              to-transparent
-              z-[1]
-              pointer-events-none
-            "
-          />
-
-          <div
-            className="
-              absolute
-              inset-y-0
-              right-0
-              w-40
-              bg-gradient-to-l
-              from-[#DCE6FF]
-              to-transparent
-              z-[1]
-              pointer-events-none
-            "
-          />
 
           {/* Content */}
           <div className="relative z-10 px-10 pt-32">
