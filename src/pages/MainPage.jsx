@@ -197,7 +197,7 @@ function MainPage() {
       </section>
 
       {/* Guide */}
-      <section id="guide" className="w-full bg-white pt-7 pb-11">
+      <section id="guide" className="w-full bg-white pt-10 pb-15">
         <div className="max-w-[1440px] mx-auto px-10">
           
           <div className="text-center mb-8">
