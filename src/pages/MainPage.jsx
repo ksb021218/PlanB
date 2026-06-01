@@ -1,5 +1,6 @@
 import MainLayout from "../layouts/MainLayout";
 import Button from "../components/Button";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -59,7 +60,18 @@ const guideSteps = [
 ];
 
 function MainPage() {
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
+  
+  const isLoggedIn = false; // 나중에 실제 로그인 상태로 교체
+
+  const handleStart = () => {
+    if (isLoggedIn) {
+      navigate("/idea");
+    } else {
+      navigate("/auth");
+    }
+  };
 
   const prevStep = () => {
     setCurrentStep((prev) =>
@@ -140,7 +152,7 @@ function MainPage() {
                 아이디어를 실행 가능한 전략으로 바꿔보세요.
               </p>
 
-              <Button>시작하기</Button>
+              <Button onClick={handleStart}>시작하기</Button>
             </div>
           </div>
 
