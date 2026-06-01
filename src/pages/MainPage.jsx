@@ -1,6 +1,7 @@
 import MainLayout from "../layouts/MainLayout";
 import Button from "../components/Button";
-import { ChevronDown } from "lucide-react";
+import { useState } from "react";
+import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 
 const scrollToSection = (id) => {
   const element = document.getElementById(id);
@@ -12,45 +13,68 @@ const scrollToSection = (id) => {
   }
 };
 
-const guideImages = [
+const guideSteps = [
   {
-    step: "STEP 01",
+    step: "STEP 1",
     title: "아이디어 입력",
+    desc: "사업 아이디어의 제목과 핵심 내용을 입력합니다.",
     image: "/Guide_01_Idea.png",
   },
   {
-    step: "STEP 02",
+    step: "STEP 2",
     title: "경쟁 서비스 탐색",
+    desc: "입력한 아이디어와 유사한 경쟁 서비스를 탐색합니다.",
     image: "/Guide_02_Explore.png",
   },
   {
-    step: "STEP 03",
+    step: "STEP 3",
     title: "BMC 자동 생성",
+    desc: "AI가 아이디어를 기반으로 비즈니스 모델 캔버스를 생성합니다.",
     image: "/Guide_03_Create.png",
   },
   {
-    step: "STEP 04",
+    step: "STEP 4",
     title: "BMC 분석",
+    desc: "생성된 BMC의 강점과 보완점을 분석합니다.",
     image: "/Guide_04_Analyze.png",
   },
   {
-    step: "STEP 05",
-    title: "결과 출력",
+    step: "STEP 5",
+    title: "분석 결과 확인",
+    desc: "AI 분석 결과를 확인하고 개선 방향을 파악합니다.",
     image: "/Guide_05_Result.png",
   },
   {
-    step: "STEP 06",
+    step: "STEP 6",
     title: "마이페이지",
+    desc: "생성한 아이디어와 BMC 기록을 관리합니다.",
     image: "/Guide_06_MyPage.png",
   },
   {
-    step: "STEP 07",
+    step: "STEP 7",
     title: "BMC 수정",
+    desc: "필요한 내용을 직접 수정하며 BMC를 완성합니다.",
     image: "/Guide_07_Edit.png",
   },
 ];
 
 function MainPage() {
+  const [currentStep, setCurrentStep] = useState(0);
+
+  const prevStep = () => {
+    setCurrentStep((prev) =>
+      prev === 0 ? guideSteps.length - 1 : prev - 1
+    );
+  };
+
+  const nextStep = () => {
+    setCurrentStep((prev) =>
+      prev === guideSteps.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  const step = guideSteps[currentStep];
+
   return (
     <MainLayout>
       {/* Hero */}
@@ -59,7 +83,9 @@ function MainPage() {
         className="
           relative
           overflow-hidden
-          bg-[radial-gradient(circle_at_center,_#e6edff_0%,_#dbe6fb_45%,_#cfddf5_100%)]
+          bg-gradient-to-r
+          from-[#F4F7FF]
+          to-[#DCE6FF]
         "
       >
         <div
@@ -73,7 +99,7 @@ function MainPage() {
             bg-no-repeat
           "
           style={{
-            backgroundImage: "url('/MainPage_Background.png')",
+            backgroundImage: "url('/Background2.png')",
           }}
         >
           {/* 좌우 배경 연결 */}
@@ -84,7 +110,7 @@ function MainPage() {
               left-0
               w-40
               bg-gradient-to-r
-              from-[#d7e2f7]
+              from-[#F4F7FF]
               to-transparent
               z-[1]
               pointer-events-none
@@ -98,9 +124,8 @@ function MainPage() {
               right-0
               w-40
               bg-gradient-to-l
-              from-[#d7e2f7]
+              from-[#DCE6FF]
               to-transparent
-              
               z-[1]
               pointer-events-none
             "
@@ -161,7 +186,7 @@ function MainPage() {
         </div>
 
         <button
-          onClick={() => scrollToSection("guide-0")}
+          onClick={() => scrollToSection("guide")}
           className="
             absolute
             bottom-8
@@ -178,57 +203,157 @@ function MainPage() {
       </section>
 
       {/* Guide */}
-      <section className="bg-white py-20">
+      <section id="guide" className="w-full bg-white pt-7 pb-11">
         <div className="max-w-[1440px] mx-auto px-10">
-          <div className="flex flex-col gap-32">
-            {guideImages.map((item, index) => (
-              <section
-                id={`guide-${index}`}
+          
+          <div className="text-center mb-8">
+            <h2 className="text-4xl font-bold text-gray-900">
+              PlanB 사용 방법
+            </h2>
+          </div>
+
+          {/* STEP Tabs */}
+          <div className="flex justify-center gap-3 mb-12 flex-wrap">
+            {guideSteps.map((item, index) => (
+              <button
                 key={item.step}
-                className="relative flex flex-col gap-6 pb-20"
+                onClick={() => setCurrentStep(index)}
+                className={`
+                  px-5 py-3 rounded-full text-sm font-semibold transition-all
+                  ${
+                    currentStep === index
+                      ? "bg-blue-500 text-white shadow-[0_8px_24px_rgba(59,130,246,0.25)]"
+                      : "bg-white text-gray-400 border border-gray-200 hover:text-blue-500 hover:border-blue-300"
+                  }
+                `}
               >
-                <div>
-                  <span className="text-blue-500 font-semibold text-2xl tracking-wide">
-                    {item.step}
-                  </span>
-
-                  <h3 className="text-3xl font-bold text-gray-900 mt-3">
-                    {item.title}
-                  </h3>
-                </div>
-
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="
-                    w-full
-                    rounded-3xl
-                    border border-gray-200
-                    shadow-[0_20px_60px_rgba(0,0,0,0.06)]
-                  "
-                />
-
-                {index !== guideImages.length - 1 && (
-                  <button
-                    onClick={() => scrollToSection(`guide-${index + 1}`)}
-                    className="
-                      absolute
-                      -bottom-16
-                      left-1/2
-                      -translate-x-1/2
-                      text-gray-500
-                      hover:text-blue-500
-                      transition
-                      animate-bounce
-                    "
-                  >
-                    <ChevronDown size={44} strokeWidth={1.5} />
-                  </button>
-                )}
-              </section>
+                {item.step}
+              </button>
             ))}
           </div>
+
+          {/* Slider */}
+          <div className="relative overflow-hidden rounded-[36px] border border-gray-100 bg-[#F8FAFF] shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
+
+            <div className="grid grid-cols-[1.15fr_0.85fr] min-h-[620px]">
+
+              {/* Left */}
+              <div className="relative flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#F4F7FF] to-[#DCE6FF] p-14">
+
+                {/* Blur */}
+                <div className="absolute w-[520px] h-[520px] rounded-full bg-white/40 blur-3xl" />
+
+                {/* Prev */}
+                <button
+                  onClick={prevStep}
+                  className="
+                    absolute left-8 z-20
+                    w-12 h-12 rounded-full bg-white/90
+                    flex items-center justify-center
+                    border border-gray-100
+                    shadow-md
+                    hover:bg-blue-50
+                    active:scale-95
+                    transition
+                  "
+                >
+                  <ChevronLeft className="text-blue-500" />
+                </button>
+
+                {/* Image */}
+                <div
+                  key={currentStep}
+                  className="
+                    relative z-10
+                    w-full max-w-[760px]
+                    animate-[slideIn_0.45s_ease]
+                  "
+                >
+                  <div className="rounded-[30px] bg-white/70 p-4 backdrop-blur shadow-[0_18px_50px_rgba(15,23,42,0.12)]">
+
+                    <img
+                      src={step.image}
+                      alt={step.title}
+                      className="
+                        w-full
+                        h-[420px]
+                        object-cover
+                        object-top
+                        rounded-[22px]
+                      "
+                    />
+                  </div>
+                </div>
+
+                {/* Next */}
+                <button
+                  onClick={nextStep}
+                  className="
+                    absolute right-8 z-20
+                    w-12 h-12 rounded-full bg-white/90
+                    flex items-center justify-center
+                    border border-gray-100
+                    shadow-md
+                    hover:bg-blue-50
+                    active:scale-95
+                    transition
+                  "
+                >
+                  <ChevronRight className="text-blue-500" />
+                </button>
+              </div>
+
+              {/* Right */}
+              <div className="flex flex-col justify-center px-16 py-14">
+
+                <p className="text-blue-500 text-lg font-bold mb-4">
+                  {step.step}
+                </p>
+
+                <h3 className="text-5xl font-bold text-gray-900 leading-tight mb-8">
+                  {step.title}
+                </h3>
+
+                <p className="text-gray-500 text-lg leading-9 mb-12">
+                  {step.desc}
+                </p>
+
+                {/* Progress */}
+                <div className="flex gap-2">
+                  {guideSteps.map((_, index) => (
+                    <div
+                      key={index}
+                      className={`
+                        h-2 rounded-full transition-all duration-300
+                        ${
+                          currentStep === index
+                            ? "w-10 bg-blue-500"
+                            : "w-2 bg-gray-300"
+                        }
+                      `}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <style>
+          {`
+            @keyframes slideIn {
+              from {
+                opacity: 0;
+                transform: translateX(40px);
+              }
+
+              to {
+                opacity: 1;
+                transform: translateX(0);
+              }
+            }
+          `}
+        </style>
       </section>
     </MainLayout>
   );

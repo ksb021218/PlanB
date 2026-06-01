@@ -25,11 +25,18 @@ function Footer() {
         <div className="grid grid-cols-[1.8fr_1fr_1fr_1fr] gap-14">
           {/* Brand */}
           <div>
-            <img
-              src="/Logo.png"
-              alt="PlanB Logo"
-              className="h-10 w-auto object-contain mb-6"
-            />
+            <Link to="/">
+              <img
+                src="/Logo.png"
+                alt="PlanB Logo"
+                className="
+                  h-10 w-auto object-contain mb-6
+                  cursor-pointer
+                  transition
+                  hover:opacity-80
+                "
+              />
+            </Link>
 
             <p className="text-gray-500 text-sm leading-7 mb-6">
               AI 기반으로 비즈니스 모델을

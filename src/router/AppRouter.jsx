@@ -10,9 +10,13 @@ import BMCResultPage from "../pages/BMCResultPage";
 import BMCEditPage from "../pages/BMCEditPage";
 import MyPage from "../pages/MyPage";
 
+import ScrollToTop from "../components/ScrollToTop";
+
 function AppRouter() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
+
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/auth" element={<AuthPage />} />
