@@ -29,7 +29,7 @@ const guideSteps = [
   {
     step: "STEP 3",
     title: "BMC 자동 생성",
-    desc: "AI가 아이디어를 기반으로 비즈니스 모델 캔버스를 생성합니다.",
+    desc: "AI가 아이디어를 기반으로 비즈니스 모델 캔버스를\n생성합니다.",
     image: "/Guide_03_Create.png",
   },
   {
@@ -297,8 +297,8 @@ function MainPage() {
                 </button>
               </div>
 
-              {/* Right */}
-              <div className="flex flex-col justify-center px-16 py-14">
+              {/* Guide Step Text */}
+              <div className="flex flex-col px-16 pt-40 pb-14">
 
                 <p className="text-blue-500 text-lg font-bold mb-4">
                   {step.step}
@@ -308,12 +308,12 @@ function MainPage() {
                   {step.title}
                 </h3>
 
-                <p className="text-gray-500 text-lg leading-9 mb-12">
+                <p className="text-gray-500 text-lg leading-8 mb-8 min-h-[72px] whitespace-pre-line">
                   {step.desc}
                 </p>
 
                 {/* Progress */}
-                <div className="flex gap-2">
+                <div className="flex gap-2 mt-2">
                   {guideSteps.map((_, index) => (
                     <div
                       key={index}
