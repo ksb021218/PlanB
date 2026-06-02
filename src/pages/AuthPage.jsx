@@ -1,4 +1,6 @@
 import MainLayout from "../layouts/MainLayout";
+import { Info } from "lucide-react";
+import { ShieldCheck } from "lucide-react";
 
 function AuthPage() {
   const handleKakaoLogin = () => {
@@ -25,7 +27,7 @@ function AuthPage() {
 
   return (
     <MainLayout>
-      <main className="min-h-[calc(100vh-80px)] bg-gradient-to-br from-[#F8FAFF] via-[#EEF4FF] to-[#DCE7FF]">
+      <main className="h-full bg-gradient-to-br from-[#F8FAFF] via-[#EEF4FF] to-[#DCE7FF]">
         <section className="max-w-[1440px] mx-auto px-16 py-24">
           <div className="grid grid-cols-[1fr_560px] items-center gap-20">
             
@@ -106,7 +108,7 @@ function AuthPage() {
                     <img
                       src="/kakao_logo.png"
                       alt="Kakao"
-                      className="absolute left-6 w-6 h-6 object-contain"
+                      className="absolute left-6 w-8.5 h-8.5 object-contain"
                     />
 
                     카카오로 시작하기
@@ -139,23 +141,29 @@ function AuthPage() {
                     <img
                       src="/google_logo.png"
                       alt="Google"
-                      className="absolute left-6 w-6 h-6 object-contain"
+                      className="absolute left-6 w-6.5 h-6.5 object-contain"
                     />
-
                     Google로 시작하기
                   </button>
                 </div>
 
                 {/* Bottom Info */}
                 <div className="border-t border-gray-200 mt-10 pt-7">
-                  <p className="text-gray-500 text-base leading-7">
-                    <span className="text-blue-500 mr-2">ⓘ</span>
-                    PlanB는 안전한 소셜 로그인만 지원합니다.
-                    <br />
-                    <span className="ml-7">
+                  <div className="flex items-start gap-3">
+                    
+                    <ShieldCheck
+                      size={25}
+                      className="text-blue-500 shrink-0 mt-[2px]"
+                    />
+
+                    <p className="text-gray-500 text-base leading-7">
+                      PlanB는 안전한 소셜 로그인만 지원합니다.
+                      <br />
+
                       회원가입 절차 없이 바로 이용하실 수 있습니다.
-                    </span>
-                  </p>
+                    </p>
+
+                  </div>
                 </div>
               </div>
             </div>
